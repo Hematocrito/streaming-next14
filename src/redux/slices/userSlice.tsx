@@ -24,9 +24,6 @@ export const userSlice = createSlice({
                 current: action.payload
               };
         },
-        changeEmail: (state, action) => {
-            state.email = action.payload;
-        }
     }
 })
 

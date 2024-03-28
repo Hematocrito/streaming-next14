@@ -19,7 +19,7 @@ export const uiSlice = createSlice({
     reducers: {
         updateUIValue: (state, action) => {
             if (process.browser) {
-                Object.keys(data.payload).forEach(
+                Object.keys(action.payload).forEach(
                   (key) => localStorage && localStorage.setItem(key, action.payload[key])
                 );
               }
