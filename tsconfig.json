@@ -13,7 +13,24 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@components/*": ["./src/*"]
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@lib/*": [
+        "./src/lib/*"
+      ],
+      "@redux/*": [
+        "./src/redux/*"
+      ],
+      "@services/*": [
+        "./src/services/*"
+      ],
+      "@interfaces/*": [
+        "./src/interfaces/*"
+      ],
+      "src/*": [
+        "./src/*"
+      ]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
