@@ -56,9 +56,14 @@ export const authSlice = createSlice({
                   success: true
               }
               };
+      },
+      logout: () => {
+        return {
+          ...initialState
+        };
       }
   }
 })
 
-export const { login, loginSuccess } = authSlice.actions
+export const { login, loginSuccess, logout } = authSlice.actions
 export default authSlice.reducer

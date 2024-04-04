@@ -27,9 +27,24 @@ export const uiSlice = createSlice({
                 ...state,
                 ...action.payload
               };
+        },
+        loadUIValue: (state) => {
+          const newVal: { [key: string]: string } = {};
+          if (typeof window !== 'undefined') {
+            Object.keys(initialState).forEach((key) => {
+              const val = localStorage.getItem(key);
+              if (val) {
+                newVal[key] = val;
+              }
+            });
+          }
+          return {
+            ...state,
+            ...newVal
+          };
         }
     }
 })
 
-export const { updateUIValue } = uiSlice.actions
+export const { updateUIValue, loadUIValue } = uiSlice.actions
 export default uiSlice.reducer

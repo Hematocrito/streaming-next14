@@ -3,10 +3,10 @@ import React, {
 } from 'react';
 import Router from 'next/router';
 import nextCookie from 'next-cookies';
-import "src/styles/globals.css";
 import type { AppProps } from "next/app";
 import { Provider } from "react-redux";
 import {store} from '../redux/store';
+import BaseLayout from '@layouts/base-layout';
 import {
   authService, userService, settingService, setGlobalConfig
 } from '@services/index';
@@ -16,8 +16,13 @@ import { updateUIValue } from '@redux/slices/uiSlice';
 import { updateSettings } from '@redux/slices/settingsSlice';
 import { IntlProvider } from 'react-intl';
 import { NextPageContext } from 'next';
-import messages from '../pages/messages';
+//import messages from '../pages/messages';
 import App from 'next/app';
+import { Socket } from 'src/socket';
+
+require("../styles/variables.less");
+require("../components/performer/performer.less");
+
 
 const LanguageContext = createContext('es');
 
@@ -151,7 +156,7 @@ function MyApp({ pageProps, Component }: any) {
 
   return (
     <LanguageContext.Provider value={lang}>
-      <IntlProvider locale={locale} messages={messages[locale]}>
+      <IntlProvider locale={locale} >
         <AppComponent1 {...pageProps} />
       </IntlProvider>
     </LanguageContext.Provider>
@@ -229,7 +234,12 @@ export default class Application extends App<IApp> {
     return(
       <Provider store={store}>
         
-            <MyApp pageProps={pageProps} Component={Component} />
+          <BaseLayout
+              layout={layout}
+              settings={{ ...settings, logo: '/logo.png' }}
+            >
+              <MyApp pageProps={pageProps} Component={Component} />
+          </BaseLayout>
         
       </Provider>
     )

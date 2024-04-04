@@ -2,17 +2,17 @@
 import Head from 'next/head';
 import { useSelector } from 'react-redux';
 
-export default function Encabezado() {
+function Encabezado() {
     const ui = useSelector((state:any) => state.ui)
     const settings = useSelector((state:any) => state.settings)
     let siteName = ui.siteName
 
     return(
+      <>
         <Head>
           <title>
-            {ui.siteName}
+            {`${ui.siteName} | Home`}
           </title>
-          <h1>{ui.siteName}</h1>
           <meta name="keywords" content={settings && settings.metaKeywords} />
           <meta
             name="description"
@@ -39,5 +39,8 @@ export default function Encabezado() {
             content={settings && settings.metaDescription}
           />
         </Head>
+        </>
     )
 }
+
+export default Encabezado;

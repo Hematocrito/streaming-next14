@@ -1,0 +1,45 @@
+.private-streaming-container {
+  position: relative;
+  margin: 5px 0;
+  //  min-height: 520px;
+  height: 500px;
+
+  #private-publisher {
+    right: 10px;
+    top: 25px;
+    height: 145px;
+    width: 145px;
+    position: absolute;
+    z-index: 1;
+    object-fit: cover;
+  }
+
+  #private-subscriber {
+    width: 100% !important;
+    //  height: 100% !important;
+    //  object-fit: cover;
+    height: 100%;
+    padding-top: 500px;
+
+    video {
+      height: 100% !important;
+      width: 100% !important;
+      object-fit: cover;
+    }
+  }
+
+  @media screen and (max-width: @mobile-screen) {
+    height: 320px;
+
+    #private-subscriber {
+      height: 320px;
+    }
+
+    #private-publisher {
+      right: 5px;
+      top: 5px;
+      height: 125px;
+      width: 125px;
+    }
+  }
+}
