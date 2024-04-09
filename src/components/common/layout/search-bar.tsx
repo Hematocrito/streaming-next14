@@ -24,7 +24,7 @@ class SearchBar extends PureComponent<IProps> {
           placeholder="Type to search here ..."
           allowClear
           enterButton
-          onPressEnter={(e: any) => (this.onSearch(e?.target?.value), onEnter(e))}
+          onPressEnter={(e: any) => (this.onSearch(e?.target?.value), onEnter && onEnter(e))}
           onSearch={this.onSearch.bind(this)}
         />
       </div>

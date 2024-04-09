@@ -11,7 +11,8 @@ import { headerContent } from '@components/common/layout/header';
 
 function NotificationHeaderMenu({ notifications, readAll, readOne }: any) {
   const { pathname, locale } = useRouter();
-  let h = headerContent[locale];
+  //let h = headerContent[locale];
+  let h = headerContent['en-US'];
   let options;
 
   if (typeof (h) === 'undefined') {
@@ -21,7 +22,7 @@ function NotificationHeaderMenu({ notifications, readAll, readOne }: any) {
     options = h.options;
   }
 
-  const redirect = (notification) => {
+  const redirect = (notification:any) => {
     console.log('RefUser ', notification.createdBy.username);
     switch (notification.type) {
       case 'gallery':
@@ -57,7 +58,7 @@ function NotificationHeaderMenu({ notifications, readAll, readOne }: any) {
     }
   };
 
-  const onClickItem = (notification) => {
+  const onClickItem = (notification:any) => {
     readOne(notification);
     redirect(notification);
   };
@@ -78,7 +79,7 @@ function NotificationHeaderMenu({ notifications, readAll, readOne }: any) {
         )}
       >
         {notifications && notifications.length > 0 ? (
-          notifications.map((notification) => (
+          notifications.map((notification:any) => (
             <Menu.Item
               onClick={() => onClickItem(notification)}
               key={notification._id}

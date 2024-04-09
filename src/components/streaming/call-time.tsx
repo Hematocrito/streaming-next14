@@ -6,7 +6,8 @@ export function CallTime({
 }) {
   const [sec, setSec] = useState(0);
   const currentSec = useRef(0);
-  const timeout = useRef(null);
+  const timeout = useRef<NodeJS.Timeout | null>(null);
+  
 
   const setTime = () => {
     if (timeout.current) clearTimeout(timeout.current);
@@ -16,7 +17,7 @@ export function CallTime({
   };
 
   //  eslint-disable-next-line no-param-reassign, no-return-assign
-  const fmtMSS = (s) => {
+  const fmtMSS = (s:any) => {
     const date = new Date(0);
     date.setSeconds(s); //  specify value for SECONDS here
     return date.toISOString().substring(11, 19);

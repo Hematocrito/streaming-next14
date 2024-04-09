@@ -16,6 +16,7 @@ import {
 import videojs from 'video.js';
 import classnames from 'classnames';
 import { isMobile } from 'react-device-detect';
+import { any } from 'video.js/dist/types/utils/events';
 // import './private-streaming-container.less';
 
 const STREAM_JOINED = 'private-stream/streamJoined';
@@ -40,17 +41,19 @@ class PrivateStreamingContainer extends PureComponent<IProps, IState> {
 
   private socket: any;
 
-  private getLiveStreamOrVodURLInterval: NodeJS.Timeout;
+  //private getLiveStreamOrVodURLInterval: NodeJS.Timeout;
 
-  private publisher: videojs.Player;
+//  private publisher: videojs.Player;
+  private publisher = videojs('publisher');
 
-  private player: videojs.Player;
+  //private player: videojs.Player;
+  private player = videojs('player');
 
   constructor(props: IProps) {
     super(props);
     this.state = {
-      streamId: null,
-      conversationId: null,
+      streamId: '',
+      conversationId: '',
       loading: false
     };
   }
@@ -69,7 +72,7 @@ class PrivateStreamingContainer extends PureComponent<IProps, IState> {
     window.addEventListener('beforeunload', this.onbeforeunload);
   }
 
-  componentDidUpdate(_, prevStates: IState) {
+  componentDidUpdate(_:any, prevStates: IState) {
     const { conversationId } = this.state;
     if (conversationId && conversationId !== prevStates.conversationId) {
       this.initSocketEvent();
@@ -298,8 +301,13 @@ class PrivateStreamingContainer extends PureComponent<IProps, IState> {
     video.setAttribute('class', 'video-js broadcaster');
     video.setAttribute('autoplay', 'autoplay');
     video.setAttribute('controls', 'controls');
-    video.srcObject = stream;
-    document.querySelector('.private-streaming-container').append(video);
+    if (video) {
+      video.srcObject = stream;
+      const container = document.querySelector('.private-streaming-container');
+      if (container) {
+        container.append(video);
+      }
+    }
   }
 
   leave() {

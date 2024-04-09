@@ -23,12 +23,21 @@ class CustomDocument extends Document {
       <Html>
         <Head />        
         <body>
+          {/* extra script */}
+          {settings && settings.headerScript && (
+            //  eslint-disable-next-line react/no-danger
+            <div dangerouslySetInnerHTML={{ __html: settings.headerScript }} />
+          )}
           <Main />
           <NextScript />
         </body>
         <script src="https://unpkg.com/video.js@7.8.3/dist/video.js" />
         <script src="https://unpkg.com/@videojs/http-streaming@1.13.3/dist/videojs-http-streaming.js" />
         <script src="https://webrtc.github.io/adapter/adapter-latest.js" />
+        {settings && settings.afterBodyScript && (
+          // eslint-disable-next-line react/no-danger
+          <div dangerouslySetInnerHTML={{ __html: settings.afterBodyScript }} />
+        )}
       </Html>
     )
   }

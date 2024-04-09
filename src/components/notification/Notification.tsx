@@ -1,12 +1,12 @@
 /* eslint-disable react/function-component-definition */
 import { useDispatch, useSelector } from 'react-redux';
 import React, { CSSProperties, useEffect } from 'react';
-import { fetchNotificaion } from '@redux/notification/actions';
+import { fetchNotification } from '@redux/slices/notificationSlice';
 import { createSelector } from 'reselect';
 import NotificationList from './NotificationList';
 
 interface NotificationProps {
-  style?: CSSProperties
+  style: CSSProperties;
 }
 
 const Notification: React.FC<NotificationProps> = ({ style }) => {
@@ -25,7 +25,7 @@ const Notification: React.FC<NotificationProps> = ({ style }) => {
   const dispatch = useDispatch();
 
   const fetchData = () => {
-    dispatch(fetchNotificaion());
+    dispatch(fetchNotification());
   };
 
   useEffect(() => {

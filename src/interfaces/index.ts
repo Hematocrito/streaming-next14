@@ -20,4 +20,4 @@ export * from './stream';
 //export * from './payout-request';
 //export * from './message';
 //export * from './feed';
-//export * from './notification';
+export * from './notification';

@@ -33,7 +33,7 @@ function NotificationList({ style, ...props }: NotificationListProps) {
     initialData();
   };
 
-  const readOne = async (notification) => {
+  const readOne = async (notification:any) => {
     if (!notification.read) {
       //  goi api PUT read
       await notificationService.read(notification._id);

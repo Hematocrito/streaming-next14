@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import Router from 'next/router';
 import nextCookie from 'next-cookies';
-import type { AppProps } from "next/app";
+import { AppProps } from "next/app";
 import { Provider } from "react-redux";
 import {store} from '../redux/store';
 import BaseLayout from '@layouts/base-layout';
@@ -25,7 +25,7 @@ require("../components/performer/performer.less");
 
 
 const LanguageContext = createContext('es');
-
+/*
 declare global {
   interface Window {
     ReactSocketIO: any;
@@ -33,7 +33,7 @@ declare global {
   }
 }
 
-function redirectLogin(ctx: any) {
+function redirectLogin(ctx:any) {
   console.log('redirectin base function..');
   if (!(typeof window === 'undefined')) {
     console.log('entro');
@@ -46,7 +46,7 @@ function redirectLogin(ctx: any) {
   ctx.res.clearCookie && ctx.res.clearCookie('role');
   ctx.res.writeHead && ctx.res.writeHead(302, { Location: '/auth/login' });
   ctx.res.end && ctx.res.end();
-}
+}*/
 
 async function auth(
   ctx: NextPageContext,

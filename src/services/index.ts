@@ -17,7 +17,7 @@ export * from './message.service';
 //export * from './subscription.service';
 //export * from './order.service';
 export * from './setting.service';
-//export * from './stream.service';
+export * from './stream.service';
 export * from './payment-wallet.service';
 //export * from './wallet-package.service';
 //export * from './payout-request.service';

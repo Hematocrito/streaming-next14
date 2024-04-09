@@ -35,11 +35,11 @@ export function StreamIcon({
 }
 
 export function LiveStreamIcon({ streamingStatus }: ILiveStreamIconProps) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line
   const [style, setStyle] = useState({});
   const socket:any = useContext(SocketContext);
-  const timeout = useRef(null);
-
+  //const timeout = useRef(null);
+  const timeout = useRef<NodeJS.Timeout | null>(null)
   const checkStreaming = () => {
     if (streamingStatus === 'offline') setStyle({ color: 'gray' });
     else if (streamingStatus === 'public') setStyle({ color: '#0AFF00' });
