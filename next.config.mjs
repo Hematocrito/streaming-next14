@@ -1,19 +1,13 @@
-/** @type {import('next').NextConfig} */
+// @ts-check
+ 
+/**
+ * @type {import('next').NextConfig}
+ */
 
 import withAntdLess from 'next-plugin-antd-less';
 
 const nextConfig = {
-  reactStrictMode: true,
-  ...withAntdLess({
-    lessVarsFilePath: './styles/variables.less',
-    cssLoaderOptions: {},
-    webpack(config) {
-      return config;
-    },
-    future: {
-      webpack5: true,
-    },
-  })
+  withAntdLess
 };
 
-export default nextConfig;
+export default nextConfig
