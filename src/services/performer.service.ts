@@ -2,7 +2,6 @@ import { APIRequest } from './api-request';
 
 export class PerformerService extends APIRequest {
   search(query?: { [key: string]: any }) {
-    console.log('QUERY ', query);
     return this.get(this.buildUrl('/performers/getAll', query));
   }
 

@@ -2,7 +2,7 @@ import fetch from 'isomorphic-unfetch';
 import Router from 'next/router';
 import cookie from 'js-cookie';
 import { isUrl } from '@lib/string';
-//import { getGlobalConfig } from './config';
+import { getGlobalConfig } from './config';
 
 export interface IResponse<T> {
   status: number;
@@ -71,15 +71,22 @@ export abstract class APIRequest {
       ...(cookie.get(TOKEN) ? { Authorization: cookie.get(TOKEN) } : {}),
       ...headers || {}
     };
-    //const config = getGlobalConfig();
+    const config = getGlobalConfig();
     const endpoint = process.env.API_ENDPOINT;
+    return fetch(isUrl(url) ? url : `${config.API_ENDPOINT || config.NEXT_PUBLIC_API_ENDPOINT}${url}`, {
+      method: verb,
+      headers: updatedHeader,
+      body: body ? JSON.stringify(body) : null
+    })
+      .then(this.checkStatus)
+      .then(this.parseJSON);/*
     return fetch(isUrl(url) ? url : `${ endpoint }${url}`, {
       method: verb,
       headers: updatedHeader,
       body: body ? JSON.stringify(body) : null
     })
       .then(this.checkStatus)
-      .then(this.parseJSON);
+      .then(this.parseJSON);*/
   }
 
   buildUrl(baseUrl: string, params?: { [key: string]: any }) {
