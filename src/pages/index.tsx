@@ -1,3 +1,4 @@
+import type { InferGetStaticPropsType, GetStaticProps } from 'next'
 import { Banner } from "@components/common/banner";
 import {
   performerService, bannerService
@@ -23,16 +24,12 @@ interface IProps {
   videos: IVideo[];
   // eslint-disable-next-line react/no-unused-prop-types
   products: IProduct[];
+  data: string;
 }
 
 export default class HomePage extends PureComponent<IProps>{
   static authenticate = true;
   static noredirect = true;
-
-  static getInitialProps() {
-    console.log('InitialProps Index ');
-    return {}
-  }
 
   state = {
     tab: '1',
@@ -40,6 +37,7 @@ export default class HomePage extends PureComponent<IProps>{
     limit: 16,
     sortBy: 'latest',
     gender: 'female',
+    banners: [],
     performers: [],
     total: 0,
     fetching: true, 
@@ -98,18 +96,24 @@ export default class HomePage extends PureComponent<IProps>{
     }
   };
 
-
   render(){
-  
+    const { banners = [], data } = this.props;
+    const {
+      performers, fetching, limit, offset, total, valor
+    } = this.state;
+    const topBanners = banners.filter((b) => b.position === 'top');
+    const bottomBanners = banners.filter((b) => b.position === 'bottom');
     return(
       <Layout>
         <Head>
           <title>MyAdultFan | Home</title>
         </Head>
         <div className="home-page">
+        {topBanners?.length > 0 && (
           <div className="banner">
-            
+            <Banner banners={topBanners} />
           </div>
+        )}
           <div style={{ position: 'relative' }}>
             <div className="home-container">
               <div className="performers-wrapper">
@@ -139,5 +143,25 @@ export default class HomePage extends PureComponent<IProps>{
         </div>
       </Layout>
     )
+  }
+}
+
+export async function getStaticProps() {
+  // Lógica para obtener las props
+  const data = 'Hola mundo'; // Obtener los datos necesarios
+  try {
+    const [banners] = await Promise.all([
+      bannerService.search({ limit: 99, status: 'active' })
+    ]);
+    return {
+      props: {
+        data,
+        banners: banners?.data?.data || []
+      },
+    };
+  } catch (error) {
+    return {
+      banners: []
+    };
   }
 }
