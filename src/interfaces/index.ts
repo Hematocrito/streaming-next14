@@ -5,7 +5,7 @@ export * from './user';
 export * from './auth';
 export * from './post';
 export * from './setting';
-//export * from './performer';
+export * from './performer';
 export * from './video';
 export * from './product';
 //export * from './gallery';

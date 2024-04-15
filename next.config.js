@@ -3,11 +3,12 @@
  */
 
 const withAntdLess = require('next-plugin-antd-less');
+const { transpileModule } = require('typescript');
 
 const nextConfig = {
   reactStrictMode: true,
   ...withAntdLess({
-    lessVarsFilePath: './styles/variables.less',
+    lessVarsFilePath: './styles/index.less',
     cssLoaderOptions: {},
     webpack(config) {
       return config;
@@ -15,7 +16,10 @@ const nextConfig = {
     future: {
       webpack5: true,
     },
-  })
+  }),
+  transpilePackages: [
+    'rc-util'
+  ],
 };
 
 module.exports = nextConfig

@@ -14,8 +14,9 @@ import Router from 'next/router';
 import { updateCurrentUser } from '@redux/slices/userSlice';
 import { updateUIValue } from '@redux/slices/uiSlice';
 import { updateSettings } from '@redux/slices/settingsSlice';
+require('./../styles/index.less');
 require('@components/performer/performer.less');
-
+require('@components/performer/home-listing.less');
 
 const LanguageContext = createContext('es');
 
