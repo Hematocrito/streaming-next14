@@ -1,4 +1,5 @@
 "use client";
+import { ILogin } from "@interfaces/auth";
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
@@ -34,7 +35,8 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-      login: (state) => {
+      login: (state, action) => {
+          
           return {
               ...state,
               loginAuth: {

@@ -14,9 +14,11 @@ import Router from 'next/router';
 import { updateCurrentUser } from '@redux/slices/userSlice';
 import { updateUIValue } from '@redux/slices/uiSlice';
 import { updateSettings } from '@redux/slices/settingsSlice';
+import BaseLayout from "@layouts/base-layout";
 require('./../styles/index.less');
 require('@components/performer/performer.less');
 require('@components/performer/home-listing.less');
+require('src/pages/auth/index.less');
 
 const LanguageContext = createContext('es');
 
@@ -189,7 +191,9 @@ export default class Application extends App<IApp> {
     }
 
     let pageProps = {};
- 
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps({ ctx });
+    }
     return{ 
       settings,
       pageProps,
@@ -208,6 +212,8 @@ export default class Application extends App<IApp> {
     const {
       Component, pageProps, settings
     } = this.props;
+    const { layout } = Component;
+    
     return(
       <Provider store={store}>
         <MyApp pageProps={pageProps} Component={Component} />

@@ -3,7 +3,6 @@ import { Banner } from "@components/common/banner";
 import {
   performerService, bannerService
 } from '@services/index';
-import { connect } from 'react-redux';
 import { Col, Layout, Pagination, Row, Spin, Tabs, Tooltip } from "antd";
 import Head from "next/head";
 import { useRouter } from 'next/router';
@@ -353,14 +352,7 @@ class HomePage extends PureComponent<IProps>{
   }
 }
 
-const mapStates = (state: any) => ({
-  ui: state.ui,
-  user: state.user.current,
-  settings: state.settings
-});
-
-const mapDispatch = {};
-export default connect(mapStates, mapDispatch)(HomePage);
+export default HomePage;
 
 export async function getStaticProps() {
   // Lógica para obtener las props
