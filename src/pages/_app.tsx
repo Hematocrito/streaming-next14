@@ -11,7 +11,7 @@ import { Provider } from "react-redux";
 import { NextPageContext } from "next";
 import nextCookie from 'next-cookies';
 import Router from 'next/router';
-import { updateCurrentUser } from '@redux/slices/userSlice';
+import { updateCurrentUser } from '@redux/user/userSlice';
 import { updateUIValue } from '@redux/slices/uiSlice';
 import { updateSettings } from '@redux/slices/settingsSlice';
 import BaseLayout from "@layouts/base-layout";
@@ -19,6 +19,7 @@ require('./../styles/index.less');
 require('@components/performer/performer.less');
 require('@components/performer/home-listing.less');
 require('src/pages/auth/index.less');
+
 
 const LanguageContext = createContext('es');
 
@@ -216,7 +217,7 @@ export default class Application extends App<IApp> {
     
     return(
       <Provider store={store}>
-        <MyApp pageProps={pageProps} Component={Component} />
+          <MyApp pageProps={pageProps} Component={Component} />    
       </Provider>      
     )
   }

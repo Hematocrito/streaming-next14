@@ -10,7 +10,8 @@ const nextConfig = {
   ...withAntdLess({
     lessVarsFilePath: './styles/index.less',
     cssLoaderOptions: {},
-    webpack(config) {
+    webpack: (config) => {
+      
       return config;
     },
     future: {
@@ -18,7 +19,8 @@ const nextConfig = {
     },
   }),
   transpilePackages: [
-    'rc-util'
+    'rc-util',
+    'rc-pagination'
   ],
 };
 

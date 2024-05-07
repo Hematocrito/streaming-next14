@@ -2,16 +2,23 @@ import { ILogin } from "@interfaces/auth";
 import { authService } from "@services/auth.service";
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 import { loginSuccess } from "./authSlice";
+import { userService } from "@services/user.service";
+import { updateCurrentUser } from "@redux/user/userSlice";
 
 
 function* workLogin(action:any):any{
-  console.log('Holita');
+  console.log('Holis');
+  try{ 
   const { payload } = action;
-  console.log('Payload ', payload);
-  const resp = yield authService.login(payload);
-  //yield put(loginSuccess(resp.data));
-  yield put({ type: 'auth/loginSuccess', payload: resp.data });
-  console.log('REsp ', resp);
+  const resp = (yield authService.login(payload)).data;
+  yield put(loginSuccess(resp));
+  yield authService.setToken(resp.token, payload.remember);
+  const userResp = (yield userService.me()).data;
+  yield put(updateCurrentUser(userResp));
+  const rol = userResp.roles[0];
+  }catch(error) {
+    console.log('Saga error ', error);
+  }
 }
 
 export function* watchLogin(){

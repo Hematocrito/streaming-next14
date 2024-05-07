@@ -36,7 +36,6 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
       login: (state, action) => {
-          
           return {
               ...state,
               loginAuth: {
