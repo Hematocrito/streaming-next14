@@ -97,7 +97,7 @@ class Footer extends PureComponent<IProps> {
           {/* eslint-disable-next-line react/no-danger */}
           {!ui.footerContent ? <div className="footer-content" dangerouslySetInnerHTML={{ __html: ui.footerContent }} />
             : (
-              <div className="copyright-text" style={{ color: 'white', textAlign: 'center' }}>
+              <div className="" style={{ color: 'white', textAlign: 'center' }}>
                 <span>
                   <Link legacyBehavior href="/">
                     <img src="/logo-footer2.png" style={{ width: 100 }} alt="" />

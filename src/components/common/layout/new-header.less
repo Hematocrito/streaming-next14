@@ -1,0 +1,115 @@
+@import '../../../styles/vars.less';
+
+
+.new-header-container{
+    background-color: @primary-color;
+    
+    @media screen and (max-width: @tablet-screen) {
+        height: 50px;
+    }
+  
+    @media screen and (max-width: @mobile-screen) {
+        height: 50px;
+    }
+
+    .logo-column {
+        @media screen and (min-width: @tablet-screen) {
+            background-color: white;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }   
+    }
+
+    .logo {
+        height: 40px;
+        width: 210px;
+        @media screen and (max-width: @tablet-screen) {
+            height: 60px;
+            width: 100%;
+            background-color: white;
+        }
+      
+        @media screen and (max-width: @mobile-screen) {
+            height: 60px;
+            width: 150px;
+            background-color: white;
+        } 
+    }
+    
+    .middle-icon {
+        color: white;
+        margin-left: 5px;
+        height: 26px;
+        width: 26px;
+        @media screen and (max-width: @mobile-screen) {
+            height: 32px; 
+            width: 32px; 
+            margin-left: 12px;
+            margin-top: 3px;
+        }
+    }    
+
+    .middle-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        .search-input {
+            width: 350px; 
+            margin:0 auto; 
+            border: 1px solid white;
+            background-color: transparent;
+            color: white;
+            border-radius: 25px;
+
+            input {
+                background-color: transparent;
+            }
+
+            input::placeholder {
+                color: white 
+            }
+        }
+    }
+
+    .unauth-content-container { 
+        display: flex; 
+        flex-direction: row; 
+        justify-content: flex-end;
+        align-items: center; 
+        gap: 24px;
+
+        @media screen and (max-width: @tablet-screen) {
+            align-items: initial;
+            gap: 16px
+        }
+        @media screen and (max-width: @mobile-screen) {
+            align-items: initial;
+            gap: 16px;
+        }
+
+        .languages-dropdown-container{
+            color: white; 
+            display: flex; 
+            flex-direction: row; 
+            align-items: center;
+
+            @media screen and (max-width: @tablet-screen) {
+               display: unset;
+            }
+            @media screen and (max-width: @mobile-screen) {
+                display: unset;
+            }
+        }
+    }
+
+    .right-corner-container {
+        @media screen and (max-width: @tablet-screen) {
+            padding: 10px;
+         }
+         @media screen and (max-width: @mobile-screen) {
+            padding: 10px;
+         }
+    }
+}

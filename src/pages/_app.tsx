@@ -10,16 +10,20 @@ import {
 import { Provider } from "react-redux";
 import { NextPageContext } from "next";
 import nextCookie from 'next-cookies';
+import { pick } from 'lodash';
+import { SETTING_KEYS } from 'src/constants';
 import Router from 'next/router';
 import { updateCurrentUser } from '@redux/user/userSlice';
-import { updateUIValue } from '@redux/slices/uiSlice';
+import { updateUIValue } from '@redux/ui/uiSlice';
+import { updateLiveStreamSettings } from '@redux/streaming/streamingSlice';
 import { updateSettings } from '@redux/slices/settingsSlice';
-import BaseLayout from "@layouts/base-layout";
+import PrimaryLayout from "@layouts/primary-layout";
 require('./../styles/index.less');
 require('@components/performer/performer.less');
 require('@components/performer/home-listing.less');
 require('src/pages/auth/index.less');
-
+require('@components/common/layout/header.less');
+require('@components/common/layout/new-header.less');
 
 const LanguageContext = createContext('es');
 
@@ -97,7 +101,7 @@ async function updateSettingsStore(ctx: NextPageContext, settings:any) {
       popup18Enabled: settings.popup18Enabled,
       popup18ContentId: settings.popup18ContentId
     })
-  );/*
+  );
   store.dispatch(
     updateLiveStreamSettings(
       pick(settings, [
@@ -111,7 +115,7 @@ async function updateSettingsStore(ctx: NextPageContext, settings:any) {
         'AntMediaAppname'
       ])
     )
-  );*/
+  );
 
   store.dispatch(
     updateSettings({
@@ -139,7 +143,6 @@ function MyApp({ pageProps, Component }: any) {
   const lang = useContext(LanguageContext);
   const AppComponent1 = Component as any;
   const [locale, setLocale] = useState('es');
-
   useEffect(() => {
     //setLocale(localStorage.getItem('locale'));
   }, []);
@@ -159,11 +162,7 @@ export default class Application extends App<IApp> {
     console.log('get initial props');
 
     if (typeof window === 'undefined') {
-      //  eslint-disable-next-line global-require
-      // const dotenv = require('dotenv');
-      // const myEnv = dotenv.config().parsed;
       const myEnv = process.env;
-
       //  publish to server config with app
       setGlobalConfig(myEnv);
 
@@ -217,7 +216,9 @@ export default class Application extends App<IApp> {
     
     return(
       <Provider store={store}>
+        <PrimaryLayout>
           <MyApp pageProps={pageProps} Component={Component} />    
+        </PrimaryLayout>
       </Provider>      
     )
   }

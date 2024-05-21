@@ -18,7 +18,7 @@ export const uiSlice = createSlice({
     initialState,
     reducers: {
         updateUIValue: (state, action) => {
-            if (process.browser) {
+            if (typeof window !== 'undefined') {
                 Object.keys(action.payload).forEach(
                   (key) => localStorage && localStorage.setItem(key, action.payload[key])
                 );
@@ -37,6 +37,7 @@ export const uiSlice = createSlice({
                 newVal[key] = val;
               }
             });
+            console.log('NEW ', newVal);
           }
           return {
             ...state,

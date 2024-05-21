@@ -102,8 +102,8 @@ export function PerformerCard({
     <>
       <Link
         legacyBehavior
-        href={href}
-        as={as}
+        href={'/stream'}
+        as={`/stream/${performer?.username || performer?._id}`}
       >
         <a>
           <div className='model-card' style={{ backgroundImage: `url(/img/imagen5.jpg)` }}>
