@@ -1,0 +1,65 @@
+@import '../../styles/default.less';
+
+.private-streaming-container {
+  position: relative;
+  margin: 5px 0;
+  //  min-height: 520px;
+  height: 500px;
+
+  #private-publisher {
+    right: 10px;
+    top: 25px;
+    height: 145px;
+    width: 145px;
+    position: absolute;
+    z-index: 1;
+
+    video {
+      height: 100% !important;
+      width: 100% !important;
+      object-fit: cover;
+    }
+  }
+
+  #private-subscriber {
+    width: 100% !important;
+    //  height: 100% !important;
+    //  min-height: 520px;
+    //  object-fit: cover;
+    height: 100%;
+    padding-top: 500px;
+
+    video {
+      height: 100% !important;
+      width: 100% !important;
+      object-fit: cover;
+    }
+  }
+
+  @media screen and (max-width: @mobile-screen) {
+    min-height: 520px;
+
+    #private-subscriber {
+      min-height: 520px !important;
+
+      video {
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: cover;
+      }
+    }
+
+    #private-publisher {
+      right: 5px;
+      top: 5px;
+      height: 125px;
+      width: 125px;
+
+      video {
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: cover;
+      }
+    }
+  }
+}

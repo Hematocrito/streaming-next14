@@ -16,7 +16,7 @@ import Router from 'next/router';
 import { updateCurrentUser } from '@redux/user/userSlice';
 import { updateUIValue } from '@redux/ui/uiSlice';
 import { updateLiveStreamSettings } from '@redux/streaming/streamingSlice';
-import { updateSettings } from '@redux/slices/settingsSlice';
+import { updateSettings } from '@redux/settings/settingsSlice';
 import PrimaryLayout from "@layouts/primary-layout";
 require('./../styles/index.less');
 require('@components/performer/performer.less');
@@ -24,6 +24,9 @@ require('@components/performer/home-listing.less');
 require('src/pages/auth/index.less');
 require('@components/common/layout/header.less');
 require('@components/common/layout/new-header.less');
+require('src/pages/stream/index.less');
+require('@components/streaming/private-streaming-container.less');
+require('@components/streaming/subscriber.less');
 
 const LanguageContext = createContext('es');
 
@@ -79,30 +82,10 @@ async function auth(
   }
 }
 
-async function updateSettingsStore(ctx: NextPageContext, settings:any) {
+async function updateSettingsStore(settings:any) {
   console.log('updating settings store');
   //const { store }: any = ctx;
-  store.dispatch(
-    updateUIValue({
-      logo: settings.logoUrl,
-      siteName: settings.siteName,
-      favicon: settings.favicon,
-      loginPlaceholderImage: settings.loginPlaceholderImage,
-      menus: settings.menus,
-      footerContent: settings.footerContent,
-      userBenefit: settings.userBenefit,
-      modelBenefit: settings.modelBenefit,
-      twitterLink: settings.twitterLink,
-      instagramLink: settings.instagramLink,
-      facebookLink: settings.facebookLink,
-      youtubeLink: settings.youtubeLink,
-      cookiePolicyEnabled: settings.cookiePolicyEnabled,
-      cookiePolicyContentId: settings.cookiePolicyContentId,
-      popup18Enabled: settings.popup18Enabled,
-      popup18ContentId: settings.popup18ContentId
-    })
-  );
-  store.dispatch(
+  /*store.dispatch(
     updateLiveStreamSettings(
       pick(settings, [
         'viewerURL',
@@ -115,7 +98,7 @@ async function updateSettingsStore(ctx: NextPageContext, settings:any) {
         'AntMediaAppname'
       ])
     )
-  );
+  );*/
 
   store.dispatch(
     updateSettings({
@@ -184,8 +167,7 @@ export default class Application extends App<IApp> {
         settingService.all('all', true)
       ]);
       settings = { ...setting.data };
-      
-      await updateSettingsStore(ctx, settings);
+      await updateSettingsStore(settings);
     } else {
       console.log('no entró a actualizar settings...');
     }

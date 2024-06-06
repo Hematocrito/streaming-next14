@@ -16,7 +16,7 @@ import { url } from 'inspector';
 
 interface IProps {
   performer: IPerformer;
-  linkToLiveStream?: boolean;
+  linkToLiveStream: boolean;
 }
 
 interface IShareModalProps {
@@ -84,11 +84,11 @@ function ShareModalContent({ performer }: IShareModalProps) {
 
 export function PerformerCard({
   performer,
-  linkToLiveStream = false
+  linkToLiveStream
 }: IProps) {
   const [online, setOnline] = useState(performer.isOnline);
   const [showShareModal, setShowShareModal] = useState(false);
-
+  linkToLiveStream = true;
   const href = linkToLiveStream ? {
     pathname: '/stream',
     query: { username: performer?.username || performer?._id }
@@ -97,13 +97,16 @@ export function PerformerCard({
     query: { username: performer?.username || performer?._id }
   };
   const as = linkToLiveStream ? `/stream/${performer?.username || performer?._id}` : `/model/${performer?.username || performer?._id}`;
-
+  
   return (
     <>
       <Link
         legacyBehavior
-        href={'/stream'}
-        as={`/stream/${performer?.username || performer?._id}`}
+        href={{
+          pathname: '/stream',
+          query: {username: performer?.username }
+        }}
+        as={as}
       >
         <a>
           <div className='model-card' style={{ backgroundImage: `url(/img/imagen5.jpg)` }}>

@@ -18,15 +18,15 @@ export const uiSlice = createSlice({
     initialState,
     reducers: {
         updateUIValue: (state, action) => {
-            if (typeof window !== 'undefined') {
-                Object.keys(action.payload).forEach(
-                  (key) => localStorage && localStorage.setItem(key, action.payload[key])
-                );
-              }
-              return {
-                ...state,
-                ...action.payload
-              };
+          if (typeof window !== 'undefined') {
+            Object.keys(action.payload).forEach(
+              (key) => localStorage && localStorage.setItem(key, action.payload[key])
+            );
+          } 
+          return {
+            ...state,
+            ...action.payload
+          };
         },
         loadUIValue: (state) => {
           const newVal: { [key: string]: string } = {};
@@ -37,7 +37,6 @@ export const uiSlice = createSlice({
                 newVal[key] = val;
               }
             });
-            console.log('NEW ', newVal);
           }
           return {
             ...state,

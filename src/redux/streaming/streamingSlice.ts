@@ -31,7 +31,7 @@ export const streamingSlice = createSlice({
                 total: state.total - 1
               };
         },
-        updateLiveStreamSettings: (state:any, action:IReduxAction<any>) => {
+        updateLiveStreamSettings: (state, action) => {
             return {
                 ...state,
                 settings: {

@@ -1,5 +1,4 @@
 "use client";
-import { IReduxAction } from "@interfaces/redux";
 import { IUser } from "@interfaces/user";
 import { createSlice } from "@reduxjs/toolkit"
 

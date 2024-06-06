@@ -13,7 +13,8 @@ import { Col, Layout, Pagination, Row, Spin, Tabs, Tooltip } from "antd";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { loadUIValue } from "@redux/ui/uiSlice";
 const { TabPane } = Tabs;
 
 interface IProps {
@@ -31,7 +32,8 @@ interface IProps {
 
 export default function HomePage(props:IProps) {
   const ui = useSelector((state:any) => state.ui);
-  const user = useSelector((state:any) => state.user.current)
+  const user = useSelector((state:any) => state.user.current);
+  const settings = useSelector((state:any) => state.settings);
   
   const [tab, setTab] = useState(1);
   const [fetching, setFetching] = useState(false);
@@ -167,7 +169,34 @@ export default function HomePage(props:IProps) {
   return (
     <Layout>
     <Head>
-      <title></title>
+    <title>
+        {`${ui.siteName} | Home`}
+      </title>
+      <meta name="keywords" content={settings && settings.metaKeywords} />
+      <meta
+        name="description"
+        content={settings && settings.metaDescription}
+      />
+      {/* OG tags */}
+      <meta
+        property="og:title"
+        content={ui && ui.siteName}
+      />
+      <meta property="og:image" content={ui && ui.logo} />
+      <meta
+        property="og:description"
+        content={settings && settings.metaDescription}
+      />
+      {/* Twitter tags */}
+      <meta
+        name="twitter:title"
+        content={ui && ui.siteName}
+      />
+      <meta name="twitter:image" content={ui && ui.logo} />
+      <meta
+        name="twitter:description"
+        content={settings && settings.metaDescription}
+      />
     </Head>
     <div className="home-page">
     {topBanners?.length > 0 && (
@@ -326,6 +355,7 @@ export async function getStaticProps() {
   const offset= 0;
   const sortBy = 'latest';
   const gender = 'female';
+  
   try {
     const [banners] = await Promise.all([
       bannerService.search({ limit: 99, status: 'active' })
