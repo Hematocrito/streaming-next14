@@ -37,7 +37,8 @@ HomePage.getInitialProps = async ({ctx}:any) => {
  const offset= 0;
  const sortBy = 'latest';
  const gender = 'female';
- 
+ console.log('FENIX');
+ /*
  try {
    const [banners] = await Promise.all([
      bannerService.search({ limit: 99, status: 'active' })
@@ -50,10 +51,12 @@ HomePage.getInitialProps = async ({ctx}:any) => {
      gender
    });
    return {
+     props: {
        data,
        banners: banners?.data?.data || [],
        todas: todas?.data?.data || [],
        modelos: resp?.data.data || []
+     },
    };
  } catch (error) {
    return {
@@ -61,7 +64,7 @@ HomePage.getInitialProps = async ({ctx}:any) => {
      todas: [],
      modelos: []
    };
- }
+ }*/
 }
 
 export default function HomePage(props:IProps) {

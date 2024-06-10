@@ -87,6 +87,7 @@ export function PerformerCard({
   linkToLiveStream
 }: IProps) {
   const [online, setOnline] = useState(performer.isOnline);
+  console.log('ISONLINE ', performer.isOnline);
   const [showShareModal, setShowShareModal] = useState(false);
   linkToLiveStream = true;
   const href = linkToLiveStream ? {
@@ -132,7 +133,9 @@ export function PerformerCard({
                 width={100}
                 height={100}
               />
-              {performer.streamingStatus !== 'private' && performer.streamingStatus !== 'public' && online === 1 && (<span className="online-status active" />)}
+              {/*performer.streamingStatus !== 'private' && 
+              performer.streamingStatus !== 'public' && */
+              online === 1 && (<span className="online-status active" />)}
               <div className="model-name" />
               <div className="model-username-wrapper">
                 <span>{performer?.name || performer?.username || 'N/A'}</span>
